@@ -51,7 +51,7 @@ namespace BowlingGameTest
             result.ShouldBe(20);
         }
 
-        [Fact(Skip = "Yep again")]
+        [Fact]
         public void WhenRollingSpareAndOneScoreShouldBeTwelve()
         {
             _game.Roll(5);

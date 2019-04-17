@@ -18,6 +18,19 @@ namespace BowlingGame
 
         public int Score()
         {
+            var frames = MakeListOfFrames();
+
+            var spares = frames.Where(frame => frame.Rolls.Sum() == 10).ToList();
+            var spareScore = spares.Sum(spare => 10 + frames[frames.IndexOf(spare) + 1].Rolls[0]);
+            var regularFrames = frames.Where(frame => frame.Rolls.Sum() != 10).ToList();
+            var regularScore = regularFrames.Sum(frame => frame.Rolls.Sum());
+            
+            
+            return spareScore + regularScore;
+        }
+
+        private List<Frame> MakeListOfFrames()
+        {
             var frames = new List<Frame>();
             var frameCount = 1;
             
@@ -29,21 +42,17 @@ namespace BowlingGame
                     {
                         FrameNumber = frameCount, 
                         Rolls = new []
-                            { 
-                                _rolls[i-2],
-                                _rolls[i-1]
-                            }
+                        { 
+                            _rolls[i-2],
+                            _rolls[i-1]
+                        }
                     });
                     
                     frameCount++;
                 }
-
-                
             }
-            // score frames
-            
-            return frames.Sum(frame => frame.Rolls.Sum());
+
+            return frames;
         }
-        
     }
 }
