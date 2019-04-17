@@ -50,6 +50,19 @@ namespace BowlingGameTest
             
             result.ShouldBe(20);
         }
+
+        [Fact(Skip = "Need to do a redesign")]
+        public void WhenRollingSpareAndOneScoreShouldBeTwelve()
+        {
+            _game.Roll(5);
+            _game.Roll(5);
+            _game.Roll(1);
+            RollLots(17, 0);
+
+            var result = _game.Score();
+            
+            result.ShouldBe(12);
+        }
     }
 
     
