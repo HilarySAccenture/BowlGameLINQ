@@ -23,6 +23,37 @@ namespace BowlingGameTest
             
             result.ShouldBe(0);
         }
+
+        [Fact]
+        public void WhenRollingOnePinScoreIsOne()
+        {
+            var game = new Game();
+            
+            game.Roll(1);
+            for (var i = 0; i < 19; i++)
+            {
+                game.Roll(0);
+            }
+
+            var result = game.Score();
+            
+            result.ShouldBe(1);
+        }
+        
+        [Fact]
+        public void WhenRollingOnePinTwentyTimesScoreIsTwenty()
+        {
+            var game = new Game();
+            
+            for (var i = 0; i < 20; i++)
+            {
+                game.Roll(1);
+            }
+
+            var result = game.Score();
+            
+            result.ShouldBe(20);
+        }
     }
 
     
